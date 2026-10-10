@@ -15,7 +15,7 @@ class ReoTimer:
     def __init__(self, root: tk.Tk) -> None:
         self.root = root
         self.root.title("Reo")
-        self.root.geometry("760x420")
+        self.root.geometry("650x300")
         self.root.minsize(560, 340)
         self.root.configure(bg=self.BACKGROUND)
 
