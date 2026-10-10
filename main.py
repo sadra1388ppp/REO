@@ -62,7 +62,7 @@ class ReoTimer:
 
         tk.Label(
             display_area,
-            text="MINIMAL. PRECISE. YOUR TIME.",
+            text="",
             font=("Segoe UI", 9),
             fg=self.MUTED,
             bg=self.BACKGROUND
