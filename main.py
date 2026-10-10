@@ -1,6 +1,17 @@
+import os
+import sys
 import time
 import tkinter as tk
 from tkinter import ttk
+
+
+def get_icon_path() -> str:
+    """Return the bundled icon path for both source and PyInstaller builds."""
+    if getattr(sys, "frozen", False) and hasattr(sys, "_MEIPASS"):
+        base_dir = sys._MEIPASS
+    else:
+        base_dir = os.path.dirname(os.path.abspath(__file__))
+    return os.path.join(base_dir, "REO.ico")
 
 
 class ReoTimer:
@@ -175,6 +186,17 @@ class ReoTimer:
 
 def main() -> None:
     root = tk.Tk()
+
+    # Set the window/taskbar icon. PyInstaller bundles REO.ico via --add-data.
+    icon_path = get_icon_path()
+    if os.path.isfile(icon_path):
+        try:
+            root.iconbitmap(default=icon_path)
+            root.wm_iconbitmap(icon_path)
+        except tk.TclError:
+            # Keep the app usable if Windows/Tk cannot load the icon for any reason.
+            pass
+
     ReoTimer(root)
     root.mainloop()
 
